@@ -27,3 +27,5 @@ const DemoList = (props) => {
 };
 
 export default React.memo(DemoList);
+
+// use memo to stop the chain of re-evaluating 
