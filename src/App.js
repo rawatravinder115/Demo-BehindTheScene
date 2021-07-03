@@ -1,9 +1,10 @@
-import React, { useState , useCallback } from 'react';
+import React, { useState , useCallback, useMemo } from 'react';
 
 import Button from './components/UI/Button/Button';
 import DemoOutput from './components/Demo/DemoOutput';
 import DemoList from './components/Demo/DemoList';
 import './App.css';
+
 
 function App() {
 
@@ -13,6 +14,8 @@ function App() {
 
   console.log("APP RUNNING ");
 
+  // useCallback store the data into memory so you dont have to create it again
+  // work only for function.
   const toggleParagraphHandler = useCallback(() => {
     if(allowToggle){
     setShowParagraph((prevShowParagraph) => !prevShowParagraph);  
@@ -27,11 +30,13 @@ function App() {
       setAllowToggle(true);
   };
 
+  const listItems = useMemo(()=>[5,3,1,10,9],[]);
+
   return (
     <div className="app">
       <h1>Hi there!</h1>
       <DemoOutput show={showParagraph} />
-      <DemoList title={listTitle} items={[5,3,1,10,9]}></DemoList>
+      <DemoList title={listTitle} items={listItems}></DemoList>
       <Button onClick={changeTitleHandler}>change List Title</Button>
       <Button onClick={allowToggleHandler}>allow toggling ! </Button>
       <Button onClick={toggleParagraphHandler}>Toggle Paragraph</Button>

@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import classes from "./DemoList.module.css";
 
+// useMemo store the all kind of data you want to store.
+
 const DemoList = (props) => {
-  const sortedList = props.items.sort((a, b) => a - b);
+
+  const { items } = props;
+
+  const sortedList = useMemo(() => {
+      console.log('ITEMS SORTED !');
+    return items.sort((a, b) => a - b);
+  }, [items]);
+
+  console.log("DEMOLIST RUNNING");
   return (
     <div className={classes.list}>
       <h2>{props.title}</h2>
@@ -16,4 +26,4 @@ const DemoList = (props) => {
   );
 };
 
-export default DemoList;
+export default React.memo(DemoList);
